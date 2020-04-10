@@ -1,0 +1,6 @@
+{
+  "block.hbm.atm": "ATM",
+  "item.hbm.bill": "Bill",
+  "item.hbm.coin": "Coin",
+  "itemGroup.Herisson's Bank": "Herisson's Bank"
+}

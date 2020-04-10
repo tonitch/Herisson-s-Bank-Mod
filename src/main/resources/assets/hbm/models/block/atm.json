@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube",
+	"textures": {
+		"particle": "hbm:block/atm_sides",
+		"north": "hbm:block/atm_front",
+		"down": "hbm:block/atm_sides",
+		"up": "hbm:block/atm_sides",
+		"east": "hbm:block/atm_sides",
+		"west": "hbm:block/atm_sides",
+		"south": "hbm:block/atm_sides"
+	}
+}
