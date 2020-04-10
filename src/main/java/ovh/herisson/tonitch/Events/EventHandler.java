@@ -3,10 +3,7 @@ package ovh.herisson.tonitch.Events;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,9 +16,7 @@ public class EventHandler {
 
     @SubscribeEvent
     public static void onCapUpdate(AttachCapabilitiesEvent<Entity> event){
-        System.out.println("hey an entity here just evented");
         if(event.getObject() instanceof PlayerEntity){
-            System.out.println("hey a player here just evented");
             event.addCapability(new ResourceLocation(HBM.MODID, "money"), new MoneyProvider());
         }
     }

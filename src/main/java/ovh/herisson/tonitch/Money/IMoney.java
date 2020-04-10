@@ -1,8 +1,9 @@
 package ovh.herisson.tonitch.Money;
 
 public interface IMoney {
+    float money = 100.0F;
 
-    public float getMoney();
-    public void setMoney(float value);
+    float getMoney();
+    void setMoney(float value);
 
 }

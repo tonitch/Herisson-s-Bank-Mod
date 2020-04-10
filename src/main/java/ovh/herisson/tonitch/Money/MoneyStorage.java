@@ -1,7 +1,6 @@
 package ovh.herisson.tonitch.Money;
 
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.FloatNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -14,8 +13,10 @@ public class MoneyStorage implements Capability.IStorage<IMoney> {
 
     @Nullable
     @Override
-    public INBT writeNBT(Capability<IMoney> capability, IMoney instance, Direction side) {
-        return new CompoundNBT().put("money", FloatNBT.valueOf(instance.getMoney()));
+    public CompoundNBT writeNBT(Capability<IMoney> capability, IMoney instance, Direction side) {
+        CompoundNBT compound = new CompoundNBT();
+        compound.putFloat("money", instance.getMoney());
+        return compound;
     }
 
     @Override
