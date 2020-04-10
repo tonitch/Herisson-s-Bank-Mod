@@ -11,7 +11,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ovh.herisson.tonitch.Money.*;
-import ovh.herisson.tonitch.NetworkHandler.NetworkHandler;
 import ovh.herisson.tonitch.block.ModBlocks;
 
 import java.util.concurrent.Callable;

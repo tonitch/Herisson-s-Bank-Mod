@@ -1,6 +1,7 @@
 package ovh.herisson.tonitch.Events;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -19,6 +20,11 @@ public class EventHandler {
         if(event.getObject() instanceof PlayerEntity){
             event.addCapability(new ResourceLocation(HBM.MODID, "money"), new MoneyProvider());
         }
+    }
+
+    @SubscribeEvent
+    public static void onCapUpdateTE(AttachCapabilitiesEvent<TileEntity> event){
+            event.addCapability(new ResourceLocation(HBM.MODID, "money"), new MoneyProvider());
     }
 
     @SubscribeEvent
