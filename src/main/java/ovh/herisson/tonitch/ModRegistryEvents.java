@@ -3,12 +3,15 @@ package ovh.herisson.tonitch;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.items.CapabilityItemHandler;
 import ovh.herisson.tonitch.Items.Bills;
 import ovh.herisson.tonitch.Items.Coin;
 import ovh.herisson.tonitch.block.BlockATM;
@@ -33,5 +36,6 @@ public class ModRegistryEvents {
         TileEntityType<?> type = TileEntityType.Builder.create(() -> new TileATM(), ModBlocks.atm).build(null).setRegistryName("atm");
         event.getRegistry().register(type);
     }
+
 
 }

@@ -6,4 +6,12 @@ public interface IMoney {
     float getMoney();
     void setMoney(float value);
 
+    default void takeMoney(float value){
+        this.setMoney(this.getMoney()-value);
+    }
+
+    default void giveMoney(float value){
+        this.setMoney(this.getMoney()+value);
+    }
+
 }

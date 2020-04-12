@@ -1,16 +1,19 @@
 package ovh.herisson.tonitch.Events;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import ovh.herisson.tonitch.HBM;
 import ovh.herisson.tonitch.Money.IMoney;
 import ovh.herisson.tonitch.Money.MoneyProvider;
+
+
 
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus=Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandler {
@@ -23,18 +26,18 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public static void onCapUpdateTE(AttachCapabilitiesEvent<TileEntity> event){
-            event.addCapability(new ResourceLocation(HBM.MODID, "money"), new MoneyProvider());
+    public static void onCloneMoney(PlayerEvent.Clone event){
+        PlayerEntity newPlayer = event.getPlayer();
+        PlayerEntity oldPlayer = event.getOriginal();
+        newPlayer.getCapability(MoneyProvider.money).orElse(null).setMoney(oldPlayer.getCapability(MoneyProvider.money).orElse(null).getMoney());
     }
 
     @SubscribeEvent
-    public static void onPlyClone(PlayerEvent.Clone event){
-        PlayerEntity player = event.getPlayer();
-        IMoney money = (IMoney) player.getCapability(MoneyProvider.money, null);
-        IMoney oldmoney = (IMoney) event.getOriginal().getCapability(MoneyProvider.money, null);
-
-        money.setMoney(oldmoney.getMoney());
-
+    public static void onJump(LivingEvent.LivingJumpEvent event){
+        if(event.getEntityLiving() instanceof PlayerEntity){
+            IMoney data = event.getEntityLiving().getCapability(MoneyProvider.money).orElse(null);
+            data.giveMoney(1.0f);
+            System.out.println("test");
+        }
     }
-
 }

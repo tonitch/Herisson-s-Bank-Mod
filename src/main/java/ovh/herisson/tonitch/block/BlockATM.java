@@ -13,7 +13,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.common.extensions.IForgeBlockState;
 import ovh.herisson.tonitch.block.Tiles.TileATM;
 
 import javax.annotation.Nullable;
@@ -54,4 +53,5 @@ public class BlockATM extends Block {
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new TileATM();
     }
+
 }

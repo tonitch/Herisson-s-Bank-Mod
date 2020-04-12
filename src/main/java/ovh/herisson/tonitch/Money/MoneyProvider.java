@@ -12,12 +12,15 @@ import javax.annotation.Nullable;
 
 public class MoneyProvider implements ICapabilitySerializable<INBT>{
 
+    public MoneyProvider() {
+    }
+
     @CapabilityInject(IMoney.class)
     public static Capability<IMoney> money;
 
-    private IMoney instance = money.getDefaultInstance();
+    public IMoney instance = money.getDefaultInstance();
+    private LazyOptional<IMoney> handler = LazyOptional.of(() -> this.instance);
 
-    private static final LazyOptional<IMoney> holder = LazyOptional.of(Money::new);
 
     @Override
     public INBT serializeNBT() {
@@ -32,7 +35,10 @@ public class MoneyProvider implements ICapabilitySerializable<INBT>{
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return cap == money ? holder.cast(): LazyOptional.empty();
+        if(cap == money){
+            return handler.cast();
+        }
+        return LazyOptional.empty();
     }
 }
 
