@@ -1,20 +1,20 @@
 package ovh.herisson.tonitch;
 
 import net.minecraft.block.Block;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.items.CapabilityItemHandler;
 import ovh.herisson.tonitch.Items.Bills;
 import ovh.herisson.tonitch.Items.Coin;
 import ovh.herisson.tonitch.block.BlockATM;
+import ovh.herisson.tonitch.block.Containers.ContainerATM;
 import ovh.herisson.tonitch.block.ModBlocks;
 import ovh.herisson.tonitch.block.Tiles.TileATM;
 
@@ -37,5 +37,12 @@ public class ModRegistryEvents {
         event.getRegistry().register(type);
     }
 
+    @SubscribeEvent
+    public static void onContainerRegistry(RegistryEvent.Register<ContainerType<?>> event){
+        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            BlockPos pos = data.readBlockPos();
+            return new ContainerATM(windowId, inv);
+        }).setRegistryName("atm"));
 
+    }
 }
