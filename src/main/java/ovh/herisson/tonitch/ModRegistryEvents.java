@@ -6,6 +6,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
@@ -39,9 +40,9 @@ public class ModRegistryEvents {
 
     @SubscribeEvent
     public static void onContainerRegistry(RegistryEvent.Register<ContainerType<?>> event){
-        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+        event.getRegistry().register(IForgeContainerType.create((id, inv, data) -> {
             BlockPos pos = data.readBlockPos();
-            return new ContainerATM(windowId, inv);
+            return new ContainerATM(id, inv, pos);
         }).setRegistryName("atm"));
 
     }

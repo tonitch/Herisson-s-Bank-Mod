@@ -6,6 +6,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -18,6 +20,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import net.minecraftforge.fml.network.NetworkHooks;
 import ovh.herisson.tonitch.block.Tiles.TileATM;
 
 import javax.annotation.Nullable;
@@ -66,7 +69,7 @@ public class BlockATM extends Block {
             TileEntity blockTile = worldIn.getTileEntity(pos);
             if(blockTile instanceof TileATM){
                 if(handIn == Hand.MAIN_HAND){
-                    player.openContainer((TileATM)blockTile);
+                    NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) blockTile, blockTile.getPos());
                     return ActionResultType.SUCCESS;
                 }
             }

@@ -3,6 +3,7 @@ package ovh.herisson.tonitch.Events;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -35,9 +36,10 @@ public class EventHandler {
     @SubscribeEvent
     public static void onJump(LivingEvent.LivingJumpEvent event){
         if(event.getEntityLiving() instanceof PlayerEntity){
-            IMoney data = event.getEntityLiving().getCapability(MoneyProvider.money).orElse(null);
-            data.giveMoney(1.0f);
-            System.out.println("test");
+            event.getEntityLiving().getCapability(MoneyProvider.money).ifPresent(h -> {
+                h.giveMoney(1.0f);
+                event.getEntityLiving().sendMessage(new StringTextComponent(String.valueOf(h.getMoney())));
+            });
         }
     }
 }

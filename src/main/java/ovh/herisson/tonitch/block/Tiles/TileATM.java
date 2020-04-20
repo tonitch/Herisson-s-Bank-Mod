@@ -3,9 +3,11 @@ package ovh.herisson.tonitch.block.Tiles;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.EnchantmentContainer;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -31,7 +33,7 @@ public class TileATM extends TileEntity implements ICapabilityProvider, INamedCo
         super(ModTiles.atm);
     }
 
-    private ItemStackHandler inventory = new ItemStackHandler(1);
+    private ItemStackHandler inventory = new ItemStackHandler(2);
     private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> this.inventory);
 
     @Nonnull
@@ -65,7 +67,7 @@ public class TileATM extends TileEntity implements ICapabilityProvider, INamedCo
 
     @Nullable
     @Override
-    public Container createMenu(int id, PlayerInventory inv, PlayerEntity ply) {
-        return new ContainerATM(id, inv);
+    public Container createMenu(int id, PlayerInventory inv, PlayerEntity ply) {;
+        return new ContainerATM(id, inv, this.pos);
     }
 }
